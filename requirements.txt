@@ -1,0 +1,6 @@
+easyocr
+imutils
+pytesseract
+pillow
+keras-ocr
+tensorflow-macos
