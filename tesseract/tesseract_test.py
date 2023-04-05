@@ -135,13 +135,18 @@ for bild in images:
         # append bbox coordinate and associated text to the list of results
         results.append(((startX, startY, endX, endY), eng_text, jpn_text))
 
-    # Display the image with bounding box and recognized text
-    orig_image = orig.copy()
     # Moving over the results and display on the image
-    en_img = Image.open(bild)
-    jp_img = Image.open(bild)
-    for ((start_X, start_Y, end_X, end_Y), e, j) in results:
-        en_img = puttext(en_img, e, (start_X,start_Y,end_X,end_Y))
-        jp_img = puttext(jp_img, j, (start_X,start_Y,end_X,end_Y))
-    en_img.save("en_" + os.path.basename(bild))
-    jp_img.save("jp_" + os.path.basename(bild))
+    if len(results) != 0:
+        en_img = Image.open(bild)
+        #jp_img = Image.open(bild)
+        try:
+            for ((start_X, start_Y, end_X, end_Y), e, j) in results:
+                print((start_X, start_Y, end_X, end_Y))
+                en_img = puttext(en_img, e, (start_X,start_Y,end_X,end_Y))
+                #jp_img = puttext(jp_img, j, (start_X,start_Y,end_X,end_Y))
+            en_img.save("./results/en_" + os.path.basename(bild))
+            #jp_img.save("./results/jp_" + os.path.basename(bild))
+        except TypeError:
+            print("error",bild, en_img.size)
+        except AttributeError:
+            pass
