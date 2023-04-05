@@ -17,7 +17,7 @@ def puttext(img, text, box, color=(255, 0, 0)):
     draw.text(xy=(tx, ty - (size + 5)), text=text, fill=(255, 0, 0), font=font)
     if tx < bx and ty < by:
         draw.rectangle(xy=(tx, ty, bx, by), outline=color, width=int(size / 10))
-    return image
+    return img
 
 
 # Creating argument dictionary for the default arguments needed in the code.
@@ -138,14 +138,13 @@ for bild in images:
     # Moving over the results and display on the image
     if len(results) != 0:
         en_img = Image.open(bild)
-        #jp_img = Image.open(bild)
+        jp_img = Image.open(bild)
         try:
             for ((start_X, start_Y, end_X, end_Y), e, j) in results:
-                print((start_X, start_Y, end_X, end_Y))
                 en_img = puttext(en_img, e, (start_X,start_Y,end_X,end_Y))
-                #jp_img = puttext(jp_img, j, (start_X,start_Y,end_X,end_Y))
+                jp_img = puttext(jp_img, j, (start_X,start_Y,end_X,end_Y))
             en_img.save("./results/en_" + os.path.basename(bild))
-            #jp_img.save("./results/jp_" + os.path.basename(bild))
+            jp_img.save("./results/jp_" + os.path.basename(bild))
         except TypeError:
             print("error",bild, en_img.size)
         except AttributeError:

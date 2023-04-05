@@ -14,7 +14,7 @@ def puttext(img, text, box, color=(255, 0, 0)):
     draw.text(xy=(tx, ty - (size + 5)), text=text, fill=(255, 0, 0), font=font)
     if tx < bx and ty < by:
         draw.rectangle(xy=(tx, ty, bx, by), outline=color, width=int(size / 10))
-    return image
+    return img
 
 
 image_paths = glob("../data/*.jpeg")
@@ -29,4 +29,4 @@ for image_path in image_paths:
             tx, ty = (int(topleft[0]), int(topleft[1]))
             bx, by = (int(bottomright[0]), int(bottomright[1]))
             image = puttext(image, text, (tx, ty, bx, by))
-        image.save(os.path.basename(image_path))
+        image.save("./results/" + os.path.basename(image_path))
